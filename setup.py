@@ -15,6 +15,7 @@ setup(
 
     packages=["ffparser"],
     package_dir={"ffparser": "ffparser/"},
+    scripts=["ffparser.py"]
 )
 
 # cleanup: remove build/
