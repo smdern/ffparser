@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
+import os
+import sys
 import argparse
+
+# remove /usr/bin from sys.path - fix importing modules
+programPath = os.path.abspath(os.path.split(__file__)[0])
+if programPath == "/usr/bin" and programPath in sys.path:
+    sys.path.remove(programPath)
 
 from ffparser.ffparser import FFprobeParser
 
