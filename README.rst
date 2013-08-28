@@ -1,5 +1,5 @@
-mp3convert
-==========
+ffparser
+========
 
 Simple python script to parse JSON output of ffprobe.
 
