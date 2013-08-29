@@ -6,8 +6,6 @@ from pprint import pprint
 
 from ffparser.process_utils import getoutput
 
-import pdb
-
 PROBE_COMMAND = "ffprobe -v quiet -print_format json -show_format -show_streams "
 
 class FFprobeParser:
