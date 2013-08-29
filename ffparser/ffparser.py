@@ -6,16 +6,19 @@ from pprint import pprint
 
 from ffparser.process_utils import getoutput
 
-ffprobe = "ffprobe -v quiet -print_format json -show_format -show_streams "
+import pdb
 
+PROBE_COMMAND = "ffprobe -v quiet -print_format json -show_format -show_streams "
 
 class FFprobeParser:
+
     def __init__(self, path):
-        self.data = json.loads(getoutput(ffprobe + re.escape(path)))
+        self.data = json.loads(getoutput(PROBE_COMMAND + re.escape(path)))
 
         self.format = self.data["format"]
         self.audio = None
         self.video = None
+
         for i in range(len(self.data["streams"])):
             if self.audio is None and self.data["streams"][i]["codec_type"] == "audio":
                 self.audio = self.data["streams"][i]
@@ -23,12 +26,7 @@ class FFprobeParser:
                 self.video = self.data["streams"][i]
 
     def _get(self, option, attribute):
-        if option == "audio":
-            src = self.audio
-        elif option == "video":
-            src = self.video
-        elif option == "format":
-            src = self.format
+        src = getattr(self, option)
         return src[attribute]
 
     def _getBitrate(self, option):
@@ -57,13 +55,5 @@ class FFprobeParser:
             except:
                 return None
 
-    def pprint(self, option):
-        if option == "audio":
-            pprint(self.audio)
-        elif option == "video":
-            pprint(self.video)
-        elif option == "format":
-            pprint(self.format)
-        else:
-            pprint(self.data)
-
+    def pprint(self, option='data'):
+        pprint(getattr(self, option))
