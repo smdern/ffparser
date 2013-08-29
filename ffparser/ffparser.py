@@ -4,7 +4,7 @@ import json
 import re
 from pprint import pprint
 
-from ffparser.process_utils import getoutput
+from process_utils import getoutput
 
 ffprobe = "ffprobe -v quiet -print_format json -show_format -show_streams "
 

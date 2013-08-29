@@ -3,7 +3,7 @@
 import subprocess
 import codecs
 
-from ffparser.tempfiles import TempFiles
+from tempfiles import TempFiles
 
 tmp = TempFiles()
 
